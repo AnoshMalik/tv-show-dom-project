@@ -5,6 +5,10 @@ rootElement.style.flexDirection = "row";
 rootElement.style.flexWrap = "wrap";
 rootElement.style.justifyContent = "center";
 
+const body = document.body;
+body.style.backgroundColor = "#e8e8e8";
+
+
 
 
 
@@ -60,7 +64,7 @@ function createCard(episode) {
   pValue = episode.summary.replaceAll("</p>", "");
   gValue = pValue.replaceAll("<p>","");
   p.innerText = gValue;
-  p.style.color = "white";
+  p.style.color = "grey";
   p.style.fontFamily = "Impact,Charcoal,sans-serif";
 
 
@@ -77,10 +81,12 @@ function createCard(episode) {
   // container.style.maxHeight = "400px";
 
 
-  container.style.backgroundColor = "gray";
+  container.style.backgroundColor = "white";
   container.style.margin = "10px";
   container.style.padding = "10px";
   container.style.borderRadius = "20px";
+  container.style.borderColor = "black";
+
   return container;
 
  }

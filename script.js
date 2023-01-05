@@ -5,22 +5,30 @@ const rootElement = document.getElementById("root");
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
-}
 
-function makePageForEpisodes(episodeList) {
-  const rootElem = document.getElementById("root");
+  
+
+function makePageForEpisodes(episodes) {
+  // const rootElem = document.getElementById("root");
   // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
-  rootElem.appendChild(createCard());
+
+  for (let x = 0; x < episodes.length; x++) {
+    rootElement.appendChild(createCard(episodes[x]));
+    // console.log(episodes);
+  }
+}
+
 }
 
 
 
-function createCard() {
+function createCard(episode) {
 
-  const oneEpisode = getOneEpisode();
-  const episodeName = oneEpisode.name;
-  let seasonNumber = oneEpisode.season.toString().padStart(2,0);
-  let episodeNumber = oneEpisode.number.toString().padStart(2, 0);
+  // const oneEpisode = getOneEpisode();
+  console.log(episode);
+  const episodeName = episode.name;
+  let seasonNumber = episode["season"].toString().padStart(2,0);
+  let episodeNumber = episode.number.toString().padStart(2, 0);
 
   const container = document.createElement("div");
   const secondaryContainer = document.createElement("div");
@@ -29,17 +37,20 @@ function createCard() {
   const p = document.createElement("p");
 
   button.innerText = `${episodeName} - S${seasonNumber} - E${episodeNumber}`; 
+  button.onclick = () => {
+    window.location = `${episode.url}`
+  };
   button.style.width = "250px";
   button.style.fontSize = "17px";
 
   // let pValue = oneEpisode.summary.replaceAll("<p>", "");
-  pValue = oneEpisode.summary.replaceAll("</p>", "");
+  pValue = episode.summary.replaceAll("</p>", "");
   gValue = pValue.replaceAll("<p>","");
   p.innerText = gValue;
   p.style.color = "black";  
 
 
-  image.src = oneEpisode.image.medium;
+  image.src = episode.image.medium;
 
   secondaryContainer.appendChild(image);
   secondaryContainer.appendChild(p);

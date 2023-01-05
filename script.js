@@ -1,13 +1,23 @@
 //You can edit ALL of the code here
+
+const body = document.body;
+body.style.backgroundColor = "#e8e8e8";
+
+
 const rootElement = document.getElementById("root");
 rootElement.style.display = "flex";
 rootElement.style.flexDirection = "row";
 rootElement.style.flexWrap = "wrap";
 rootElement.style.justifyContent = "center";
 
-const body = document.body;
-body.style.backgroundColor = "#e8e8e8";
+// LEVEL 200 --> SEARCH 
+const searchDiv = document.getElementById("searchDiv");
+searchDiv.style.display = "flex";
+searchDiv.style.flexDirection = "row";
+searchDiv.style.justifyContent = "center";
 
+const searchBar = document.getElementById("searchBar");
+const searchResults = document.getElementById("searchResults");
 
 
 
@@ -17,25 +27,21 @@ function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
 
-  
+}
 
 function makePageForEpisodes(episodes) {
-  // const rootElem = document.getElementById("root");
-  // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
 
   for (let x = 0; x < episodes.length; x++) {
     rootElement.appendChild(createCard(episodes[x]));
-    // console.log(episodes);
   }
 }
 
-}
+
 
 
 
 function createCard(episode) {
 
-  // const oneEpisode = getOneEpisode();
   console.log(episode);
   const episodeName = episode.name;
   let seasonNumber = episode["season"].toString().padStart(2,0);
@@ -60,7 +66,6 @@ function createCard(episode) {
   button.style.fontSize = "17px";
   button.style.fontWeight = "900";
 
-  // let pValue = oneEpisode.summary.replaceAll("<p>", "");
   pValue = episode.summary.replaceAll("</p>", "");
   gValue = pValue.replaceAll("<p>","");
   p.innerText = gValue;
@@ -78,7 +83,6 @@ function createCard(episode) {
   container.style.width = "250px";
   container.style.minHeight = "500px";
   
-  // container.style.maxHeight = "400px";
 
 
   container.style.backgroundColor = "white";
@@ -91,9 +95,10 @@ function createCard(episode) {
 
  }
 
-// const rootElement = document.getElementById("root");
-// const p = rootElement.appendChild("p");
-// p.textContent = "BLAHH";
+function searchMatches() {
+
+
+ }
 
 
 window.onload = setup;

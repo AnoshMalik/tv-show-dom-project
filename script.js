@@ -1,7 +1,9 @@
 //You can edit ALL of the code here
 const rootElement = document.getElementById("root");
-rootElement.style.display = "flexbox";
+rootElement.style.display = "flex";
 rootElement.style.flexDirection = "row";
+rootElement.style.flexWrap = "wrap";
+
 
 
 

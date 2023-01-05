@@ -1,5 +1,8 @@
 //You can edit ALL of the code here
 const rootElement = document.getElementById("root");
+rootElement.style.display = "flexbox";
+rootElement.style.flexDirection = "row";
+
 
 
 function setup() {

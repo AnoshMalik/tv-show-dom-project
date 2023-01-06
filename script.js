@@ -101,11 +101,17 @@ searchBar.oninput = searchMatches();
 
 function searchMatches() {
   const allRecords = getAllEpisodes();
-  for (let x of allRecords) {
-    if (x.summary.includes(searchBar.value || x.name.includes(searchBar.value )) { }
-        console.log();
-  }
-  // if (searchBar.value != "") {
+  
+  
+  // for (let x of allRecords) {
+  //   if (x.summary.includes(searchBar.value) || x.name.includes(searchBar.value)) { 
+  //             console.log("Found record : " + x.number + " : " + x.name);
+
+  //   }
+  // }
+
+  console.log(allRecords.map(record => record.name).filter(name => name.includes(searchBar.value)));
+
 
   searchResults.innerText = searchBar.value;
   console.log(searchBar.value);

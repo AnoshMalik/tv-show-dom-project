@@ -42,7 +42,7 @@ function makePageForEpisodes(episodes) {
 
 function createCard(episode) {
 
-  console.log(episode);
+  // console.log(episode);
   const episodeName = episode.name;
   let seasonNumber = episode["season"].toString().padStart(2,0);
   let episodeNumber = episode.number.toString().padStart(2, 0);
@@ -95,8 +95,24 @@ function createCard(episode) {
 
  }
 
-function searchMatches() {
 
+
+searchBar.oninput = searchMatches();
+
+function searchMatches() {
+  const allRecords = getAllEpisodes();
+  for (let x of allRecords) {
+    if (x.summary.includes(searchBar.value || x.name.includes(searchBar.value )) { }
+        console.log();
+  }
+  // if (searchBar.value != "") {
+
+  searchResults.innerText = searchBar.value;
+  console.log(searchBar.value);
+  // }else { 
+    
+
+  // }
 
  }
 

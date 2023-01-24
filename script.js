@@ -1,3 +1,4 @@
+// NEW CODE
 //You can edit ALL of the code here
 
 const body = document.body;
@@ -24,6 +25,7 @@ function setup() {
 }
 
 function makePageForEpisodes(episodes) {
+  rootElement.innerHTML="";
   for (let x = 0; x < episodes.length; x++) {
     rootElement.appendChild(createCard(episodes[x]));
   }
@@ -81,18 +83,20 @@ function createCard(episode) {
 searchBar.oninput = searchMatches();
 
 function searchMatches() {
-  const allRecords = getAllEpisodes();
+  let target=searchBar.value;
+  
+  const filteredEpisodes = getAllEpisodes().filter((episode)=>{
+    return episode["name"].includes(target);
+  })
+if(filteredEpisodes.length===0){
+return rootElement.innerHTML="<h1>Sorry there is no episodes</h1>"
+}else{
+  return makePageForEpisodes(filteredEpisodes)
+}
+ 
+  
 
-  // allRecords
-  //   .map((record) => record.name)
-  //   .filter((name) => name.includes(searchBar.value));
   
-   allRecords
-     .map((record) => record.name)
-     .filter((name) => name.includes(searchBar.value));
-  
-  
-  searchResults.innerText = searchBar.value;
 }
 
 window.onload = setup;

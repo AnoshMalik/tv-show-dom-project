@@ -1,6 +1,7 @@
 // NEW CODE
 //You can edit ALL of the code here
 
+// GLOBAL VARS
 const body = document.body;
 body.style.backgroundColor = "#e8e8e8";
 
@@ -9,6 +10,7 @@ rootElement.style.display = "flex";
 rootElement.style.flexDirection = "row";
 rootElement.style.flexWrap = "wrap";
 rootElement.style.justifyContent = "center";
+// GLOBAL VARS
 
 // LEVEL 200 --> SEARCH
 const searchDiv = document.getElementById("searchDiv");
@@ -19,20 +21,23 @@ searchDiv.style.justifyContent = "center";
 const searchBar = document.getElementById("searchBar");
 const searchResults = document.getElementById("searchResults");
 
+// STARTING POINT
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
 }
+// STARTING POINT
 
+// (RE)LOAD FEATURES
 function makePageForEpisodes(episodes) {
-  rootElement.innerHTML="";
+  rootElement.innerHTML = "";
   for (let x = 0; x < episodes.length; x++) {
     rootElement.appendChild(createCard(episodes[x]));
   }
 }
 
+// CREATE CARDS
 function createCard(episode) {
-  // console.log(episode);
   const episodeName = episode.name;
   let seasonNumber = episode["season"].toString().padStart(2, 0);
   let episodeNumber = episode.number.toString().padStart(2, 0);
@@ -79,24 +84,26 @@ function createCard(episode) {
 
   return container;
 }
+// CREATE CARDS
 
 searchBar.oninput = searchMatches();
 
+// SEARCH FUNCTION
 function searchMatches() {
-  let target=searchBar.value;
-  
-  const filteredEpisodes = getAllEpisodes().filter((episode)=>{
-    return episode["name"].includes(target);
-  })
-if(filteredEpisodes.length===0){
-return rootElement.innerHTML="<h1>Sorry there is no episodes</h1>"
-}else{
-  return makePageForEpisodes(filteredEpisodes)
-}
- 
-  
+  let target = searchBar.value;
 
+  const filteredEpisodes = getAllEpisodes().filter((episode) => {
+    if ((episode["name"].toLowerCase().includes(target.toLowerCase())) || (episode["summary"].toLowerCase().includes(target.toLowerCase()))){ 
+      return episode;
+    }
+
+  });
   
+  if (filteredEpisodes.length === 0) {
+    return (rootElement.innerHTML = "<h1>Sorry there is no episodes</h1>");
+  } else {
+    return makePageForEpisodes(filteredEpisodes);
+  }
 }
 
 window.onload = setup;

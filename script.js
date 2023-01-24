@@ -102,6 +102,7 @@ function searchMatches() {
   if (filteredEpisodes.length === 0) {
     return (rootElement.innerHTML = "<h1>Sorry there is no episodes</h1>");
   } else {
+    searchResults.innerText = "Displaying " + filteredEpisodes.length + " of 73";
     return makePageForEpisodes(filteredEpisodes);
   }
 }

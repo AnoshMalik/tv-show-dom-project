@@ -12,30 +12,21 @@ rootElement.style.flexWrap = "wrap";
 rootElement.style.justifyContent = "center";
 // GLOBAL VARS
 
-
 // Level 400
 let fetchEpisodes;
-// fetch('https://api.tvmaze.com/shows/82/episodes')
-//   .then(response => response.json())
-//   .then(data => fetchEpisodes = data);
+fetch("https://api.tvmaze.com/shows/82/episodes")
+  .then((jsonData) => jsonData.json())
+  .then((data) => fetchEm(data));
 
+function fetchEm(data) {
+  console.log(data);
+  fetchEpisodes = data;
+}
 
-
-  fetch("https://api.tvmaze.com/shows/82/episodes")
-    .then((jsonData) => jsonData.json())
-    .then((data) => fetchEm(data));
-
-  function fetchEm (data)  {
-    console.log(data);
-    fetchEpisodes = data;
-  };
-  // .catch(err => console.error(err));
 // Level 400
 
-// console.log("fetched episodes : --> " +   fetchEpisodes);
-
 // Level 300 --> SELECT Tag
-const selectTag = document.getElementById("selectTag");
+const episodesSelectTag = document.getElementById("episodesSelectTag");
 
 // LEVEL 200 --> SEARCH
 const searchDiv = document.getElementById("searchDiv");
@@ -47,13 +38,12 @@ const searchBar = document.getElementById("searchBar");
 const searchResults = document.getElementById("searchResults");
 // Level 200
 
-
 // STARTING POINT
 function setup() {
   // Level 200
   // const allEpisodes = getAllEpisodes();
 
-  // Level 400 --> REPLACE JSON FILE W/ FETCH 
+  // Level 400 --> REPLACE JSON FILE W/ FETCH
   const allEpisodes = fetchEpisodes;
   console.log(allEpisodes + "sdsdasd");
 
@@ -144,61 +134,61 @@ function searchMatches() {
 }
 // Level 200 Complete
 
-
-
-
-
-  
 // Level 300
 const episodesList = getAllEpisodes();
-let oneEpisode;
 // Level 300
+
+
+// Level 400
+const showsList = getAllShows();
+console.log(showsList);
+// Level 400
 
 // Q1. WHY IS THIS LOADING WHEN WNDOW LOADS i.e BEFORE ITS CLICKED
 // Level 200
 // selectTag.onclick = populateSelect(episodesList);
 
 // Level 300
-selectTag.onclick = populateSelect(episodesList);
-
+episodesSelectTag.onclick = populateSelect(episodesList);
+showsSelectTag.onclick = populateSelectShows(showsList);
 
 // Q2. WHYS IS THIS NOT?
 // NOT USED #1
 // selectTag.onchange = redirectToEpisode();
 
 // Q3. WHY IS THIS WORKING AS INTENDED?
-selectTag.addEventListener("change", () => {
-    console.log("onChange method() : " + selectTag.value);
-    window.open(episodesList[selectTag.value].url);
-  
-
+episodesSelectTag.addEventListener("change", () => {
+  console.log("onChange method() : " + episodesSelectTag.value);
+  window.open(episodesList[episodesSelectTag.value].url);
 });
 
 
+// SELECT TAG FOR EPISODES
 function populateSelect(episodes) {
-  // e.preventDefault();
-
-  // console.log(episodes);
   const allEpisodes = episodes;
 
   allEpisodes.map((episode, index) => {
     let option = document.createElement("option");
     option.value = index;
     option.innerHTML = episode.name;
-    selectTag.appendChild(option);
-    // selectTag.onchange = redirectToEpisode(episode);
+    episodesSelectTag.appendChild(option);
 
-    selectTag.addEventListener("change", () => {
-      oneEpisode = episode.url;
-    });
   });
-  // console.log("logging");
 }
 
-// NOT USED #1
-// function redirectToEpisode(episode) {
-//   // window.open(episode.url);
-//   console.log("redirecting");
-// }
+// SELECT TAG FOR SHOWS
+function populateSelectShows(shows) {
+  const allShows = shows;
+
+  allShows.map((show, index) => {
+    let option = document.createElement("option");
+    option.value = index;
+    option.innerHTML = show.name;
+    showsSelectTag.appendChild(option);
+  });
+}
+
+
+
 
 window.onload = setup;

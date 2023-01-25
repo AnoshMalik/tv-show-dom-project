@@ -115,26 +115,48 @@ function searchMatches() {
 // Level 200 Complete
 
 // Level 300
-selectTag.onclick = populateSelect();
+const episodesList = getAllEpisodes();
+let oneEpisode;
+
+// Q1. WHY IS THIS LOADING WHEN WNDOW LOADS i.e BEFORE ITS CLICKED
+selectTag.onclick = populateSelect(episodesList);
+
+
+// Q2. WHYS IS THIS NOT?
+// NOT USED #1
 // selectTag.onchange = redirectToEpisode();
 
-function populateSelect() {
-  getAllEpisodes().map((episode, index) => {
+// Q3. WHY IS THIS WORKING AS INTENDED?
+selectTag.addEventListener("change", () => {
+    console.log("onChange method() : " + selectTag.value);
+    window.open(episodesList[selectTag.value].url);
+  
+
+});
+
+
+function populateSelect(episodes) {
+  // e.preventDefault();
+  const allEpisodes = episodes;
+
+  allEpisodes.map((episode, index) => {
     let option = document.createElement("option");
     option.value = index;
     option.innerHTML = episode.name;
     selectTag.appendChild(option);
     // selectTag.onchange = redirectToEpisode(episode);
 
-    // option.addEventListener("click", () => {
-    //   console.log(selectTag.options[selectTag.selectedIndex].text);
-    // });
+    selectTag.addEventListener("change", () => {
+      oneEpisode = episode.url;
+    });
   });
+  // console.log("logging");
 }
 
-function redirectToEpisode(episode) {
-  // window.open(episode.url);
-  console.log("redirecting");
-}
+// NOT USED #1
+// function redirectToEpisode(episode) {
+//   // window.open(episode.url);
+//   console.log("redirecting");
+// }
 
 window.onload = setup;

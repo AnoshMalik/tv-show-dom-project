@@ -14,7 +14,7 @@ rootElement.style.justifyContent = "center";
 
 
 // Level 400
-// let fetchEpisodes;
+let fetchEpisodes;
 // fetch('https://api.tvmaze.com/shows/82/episodes')
 //   .then(response => response.json())
 //   .then(data => fetchEpisodes = data);
@@ -23,10 +23,11 @@ rootElement.style.justifyContent = "center";
 
   fetch("https://api.tvmaze.com/shows/82/episodes")
     .then((jsonData) => jsonData.json())
-    .then((data) => fetchEpisodes(data));
+    .then((data) => fetchEm(data));
 
-  let fetchEpisodes = (data) => {
-    console.log( data);
+  function fetchEm (data)  {
+    console.log(data);
+    fetchEpisodes = data;
   };
   // .catch(err => console.error(err));
 // Level 400

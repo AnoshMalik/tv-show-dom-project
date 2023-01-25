@@ -17,14 +17,14 @@ rootElement.style.justifyContent = "center";
 
 // Level 400
 let fetchEpisodes;
-fetch("https://api.tvmaze.com/shows/82/episodes")
+let fetchShows;
+  fetch("https://api.tvmaze.com/shows/82/episodes")
   .then((jsonData) => jsonData.json())
   .then((data) => fetchEm(data));
 
 function fetchEm(data) {
   fetchEpisodes = data;
 }
-
 // Level 400
 
 // Level 300 --> Episodes SELECT Tag
@@ -167,8 +167,14 @@ episodesSelectTag.addEventListener("change", () => {
 });
 
 showsSelectTag.addEventListener("change", () => {
-  console.log("onChange method() : " + showsSelectTag.value);
-  // window.open(episodesList[episodesSelectTag.value].url);
+  
+  console.log(showsSelectTag.value);
+
+  fetch(`https://api.tvmaze.com/shows/${showsSelectTag.value}/episodes`)
+    .then((jsonData) => jsonData.json())
+    .then((data) => fetchEm(data));
+  makePageForEpisodes(fetchEpisodes);
+  populateSelect(fetchEpisodes);  
 });
 
 
@@ -191,7 +197,7 @@ function populateSelectShows(shows) {
 
   allShows.map((show, index) => {
     let option = document.createElement("option");
-    option.value = index;
+    option.value = show.id;
     option.innerHTML = show.name;
     showsSelectTag.appendChild(option);
   });

@@ -25,8 +25,11 @@ function fetchEm(data) {
 
 // Level 400
 
-// Level 300 --> SELECT Tag
+// Level 300 --> Episodes SELECT Tag
 const episodesSelectTag = document.getElementById("episodesSelectTag");
+// Level 400 - Shows SELECT Tag
+const showsSelectTag = document.getElementById("showsSelectTag");
+
 
 // LEVEL 200 --> SEARCH
 const searchDiv = document.getElementById("searchDiv");
@@ -141,7 +144,6 @@ const episodesList = getAllEpisodes();
 
 // Level 400
 const showsList = getAllShows();
-console.log(showsList);
 // Level 400
 
 // Q1. WHY IS THIS LOADING WHEN WNDOW LOADS i.e BEFORE ITS CLICKED
@@ -160,6 +162,11 @@ showsSelectTag.onclick = populateSelectShows(showsList);
 episodesSelectTag.addEventListener("change", () => {
   console.log("onChange method() : " + episodesSelectTag.value);
   window.open(episodesList[episodesSelectTag.value].url);
+});
+
+showsSelectTag.addEventListener("change", () => {
+  console.log("onChange method() : " + showsSelectTag.value);
+  // window.open(episodesList[episodesSelectTag.value].url);
 });
 
 

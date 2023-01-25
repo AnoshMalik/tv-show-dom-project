@@ -12,6 +12,27 @@ rootElement.style.flexWrap = "wrap";
 rootElement.style.justifyContent = "center";
 // GLOBAL VARS
 
+
+// Level 400
+// let fetchEpisodes;
+// fetch('https://api.tvmaze.com/shows/82/episodes')
+//   .then(response => response.json())
+//   .then(data => fetchEpisodes = data);
+
+
+
+  fetch("https://api.tvmaze.com/shows/82/episodes")
+    .then((jsonData) => jsonData.json())
+    .then((data) => fetchEpisodes(data));
+
+  let fetchEpisodes = (data) => {
+    console.log( data);
+  };
+  // .catch(err => console.error(err));
+// Level 400
+
+// console.log("fetched episodes : --> " +   fetchEpisodes);
+
 // Level 300 --> SELECT Tag
 const selectTag = document.getElementById("selectTag");
 
@@ -23,10 +44,18 @@ searchDiv.style.justifyContent = "center";
 
 const searchBar = document.getElementById("searchBar");
 const searchResults = document.getElementById("searchResults");
+// Level 200
+
 
 // STARTING POINT
 function setup() {
-  const allEpisodes = getAllEpisodes();
+  // Level 200
+  // const allEpisodes = getAllEpisodes();
+
+  // Level 400 --> REPLACE JSON FILE W/ FETCH 
+  const allEpisodes = fetchEpisodes;
+  console.log(allEpisodes + "sdsdasd");
+
   makePageForEpisodes(allEpisodes);
 }
 // STARTING POINT
@@ -114,11 +143,21 @@ function searchMatches() {
 }
 // Level 200 Complete
 
+
+
+
+
+  
 // Level 300
 const episodesList = getAllEpisodes();
 let oneEpisode;
+// Level 300
 
 // Q1. WHY IS THIS LOADING WHEN WNDOW LOADS i.e BEFORE ITS CLICKED
+// Level 200
+// selectTag.onclick = populateSelect(episodesList);
+
+// Level 300
 selectTag.onclick = populateSelect(episodesList);
 
 
@@ -137,6 +176,8 @@ selectTag.addEventListener("change", () => {
 
 function populateSelect(episodes) {
   // e.preventDefault();
+
+  // console.log(episodes);
   const allEpisodes = episodes;
 
   allEpisodes.map((episode, index) => {

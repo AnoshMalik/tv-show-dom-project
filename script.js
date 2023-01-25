@@ -12,6 +12,9 @@ rootElement.style.flexWrap = "wrap";
 rootElement.style.justifyContent = "center";
 // GLOBAL VARS
 
+// Level 300 --> SELECT Tag
+const selectTag = document.getElementById("selectTag");
+
 // LEVEL 200 --> SEARCH
 const searchDiv = document.getElementById("searchDiv");
 searchDiv.style.display = "flex";
@@ -93,21 +96,45 @@ function searchMatches() {
   let target = searchBar.value;
 
   const filteredEpisodes = getAllEpisodes().filter((episode) => {
-    if ((episode["name"].toLowerCase().includes(target.toLowerCase())) || (episode["summary"].toLowerCase().includes(target.toLowerCase()))){ 
+    if (
+      episode["name"].toLowerCase().includes(target.toLowerCase()) ||
+      episode["summary"].toLowerCase().includes(target.toLowerCase())
+    ) {
       return episode;
     }
-
   });
-  
+
   if (filteredEpisodes.length === 0) {
     return (rootElement.innerHTML = "<h1>Sorry there is no episodes</h1>");
   } else {
-    searchResults.innerText = "Displaying " + filteredEpisodes.length + " of 73";
+    searchResults.innerText =
+      "Displaying " + filteredEpisodes.length + " of 73";
     return makePageForEpisodes(filteredEpisodes);
   }
 }
+// Level 200 Complete
+
+// Level 300
+selectTag.onclick = populateSelect();
+// selectTag.onchange = redirectToEpisode();
+
+function populateSelect() {
+  getAllEpisodes().map((episode, index) => {
+    let option = document.createElement("option");
+    option.value = index;
+    option.innerHTML = episode.name;
+    selectTag.appendChild(option);
+    // selectTag.onchange = redirectToEpisode(episode);
+
+    // option.addEventListener("click", () => {
+    //   console.log(selectTag.options[selectTag.selectedIndex].text);
+    // });
+  });
+}
+
+function redirectToEpisode(episode) {
+  // window.open(episode.url);
+  console.log("redirecting");
+}
 
 window.onload = setup;
-
-
-// Level 200 Complete

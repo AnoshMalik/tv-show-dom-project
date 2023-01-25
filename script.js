@@ -1,3 +1,6 @@
+// import _ from "underscore";
+// import * as _ from "underscore";
+
 // NEW CODE
 //You can edit ALL of the code here
 
@@ -48,7 +51,7 @@ function setup() {
 
   // Level 400 --> REPLACE JSON FILE W/ FETCH
   const allEpisodes = fetchEpisodes;
-  console.log(allEpisodes + "sdsdasd");
+  // console.log(allEpisodes + "sdsdasd");
 
   makePageForEpisodes(allEpisodes);
 }
@@ -144,6 +147,8 @@ const episodesList = getAllEpisodes();
 
 // Level 400
 const showsList = getAllShows();
+const sortedShowsList = _.sortBy(showsList, "name");
+console.log(sortedShowsList);
 // Level 400
 
 // Q1. WHY IS THIS LOADING WHEN WNDOW LOADS i.e BEFORE ITS CLICKED
@@ -152,7 +157,7 @@ const showsList = getAllShows();
 
 // Level 300
 episodesSelectTag.onclick = populateSelect(episodesList);
-showsSelectTag.onclick = populateSelectShows(showsList);
+showsSelectTag.onclick = populateSelectShows(sortedShowsList);
 
 // Q2. WHYS IS THIS NOT?
 // NOT USED #1

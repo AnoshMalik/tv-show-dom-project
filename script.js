@@ -22,7 +22,6 @@ fetch("https://api.tvmaze.com/shows/82/episodes")
   .then((data) => fetchEm(data));
 
 function fetchEm(data) {
-  console.log(data);
   fetchEpisodes = data;
 }
 
@@ -51,11 +50,10 @@ function setup() {
 
   // Level 400 --> REPLACE JSON FILE W/ FETCH
   const allEpisodes = fetchEpisodes;
-  // console.log(allEpisodes + "sdsdasd");
-
   makePageForEpisodes(allEpisodes);
 }
 // STARTING POINT
+
 
 // (RE)LOAD FEATURES
 function makePageForEpisodes(episodes) {
@@ -148,7 +146,6 @@ const episodesList = getAllEpisodes();
 // Level 400
 const showsList = getAllShows();
 const sortedShowsList = _.sortBy(showsList, "name");
-console.log(sortedShowsList);
 // Level 400
 
 // Q1. WHY IS THIS LOADING WHEN WNDOW LOADS i.e BEFORE ITS CLICKED

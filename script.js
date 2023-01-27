@@ -18,13 +18,14 @@ rootElement.style.justifyContent = "center";
 // Level 400
 let fetchEpisodes;
 let fetchShows;
-  fetch("https://api.tvmaze.com/shows/82/episodes")
+fetch("https://api.tvmaze.com/shows/82/episodes")
   .then((jsonData) => jsonData.json())
   .then((data) => fetchEm(data));
 
 function fetchEm(data) {
   fetchEpisodes = data;
 }
+
 // Level 400
 
 // Level 300 --> Episodes SELECT Tag
@@ -32,6 +33,13 @@ const episodesSelectTag = document.getElementById("episodesSelectTag");
 // Level 400 - Shows SELECT Tag
 const showsSelectTag = document.getElementById("showsSelectTag");
 
+//  fetch(`https://api.tvmaze.com/shows/${showsSelectTag.value}/episodes`)
+//    .then((jsonData) => jsonData.json())
+//    .then((data) => fetchSh(data));
+
+function fetchSh(data) {
+  fetchShows = data;
+}
 
 // LEVEL 200 --> SEARCH
 const searchDiv = document.getElementById("searchDiv");
@@ -53,7 +61,6 @@ function setup() {
   makePageForEpisodes(allEpisodes);
 }
 // STARTING POINT
-
 
 // (RE)LOAD FEATURES
 function makePageForEpisodes(episodes) {
@@ -142,7 +149,6 @@ function searchMatches() {
 const episodesList = getAllEpisodes();
 // Level 300
 
-
 // Level 400
 const showsList = getAllShows();
 const sortedShowsList = _.sortBy(showsList, "name");
@@ -167,16 +173,25 @@ episodesSelectTag.addEventListener("change", () => {
 });
 
 showsSelectTag.addEventListener("change", () => {
-  
   console.log(showsSelectTag.value);
 
   fetch(`https://api.tvmaze.com/shows/${showsSelectTag.value}/episodes`)
     .then((jsonData) => jsonData.json())
-    .then((data) => fetchEm(data));
-  makePageForEpisodes(fetchEpisodes);
-  populateSelect(fetchEpisodes);  
+    .then((data) => {
+      anotherFunction(data);
+    });
+
+  // makePageForEpisodes(fetchShows);
+  // console.log("Fetched");
+  // populateSelect(fetchShows);
 });
 
+function anotherFunction(data) {
+  console.log("Fetched");
+
+  makePageForEpisodes(data);
+  populateSelect(data);
+ }
 
 // SELECT TAG FOR EPISODES
 function populateSelect(episodes) {
@@ -187,7 +202,6 @@ function populateSelect(episodes) {
     option.value = index;
     option.innerHTML = episode.name;
     episodesSelectTag.appendChild(option);
-
   });
 }
 
@@ -202,8 +216,5 @@ function populateSelectShows(shows) {
     showsSelectTag.appendChild(option);
   });
 }
-
-
-
 
 window.onload = setup;

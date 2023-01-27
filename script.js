@@ -188,19 +188,21 @@ showsSelectTag.addEventListener("change", () => {
 
 function anotherFunction(data) {
   console.log("Fetched");
+  populateSelect(data);
 
   makePageForEpisodes(data);
-  populateSelect(data);
- }
+}
 
 // SELECT TAG FOR EPISODES
 function populateSelect(episodes) {
+  episodesSelectTag.innerHTML = "";
   const allEpisodes = episodes;
 
   allEpisodes.map((episode, index) => {
     let option = document.createElement("option");
     option.value = index;
-    option.innerHTML = episode.name;
+    option.innerHTML = `S${episode.season.toString().padStart(2, 0)}
+    E${(index + 1).toString().padStart(2, 0)} ${episode.name} `;
     episodesSelectTag.appendChild(option);
   });
 }

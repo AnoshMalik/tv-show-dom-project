@@ -16,6 +16,7 @@ rootElement.style.justifyContent = "center";
 // GLOBAL VARS
 
 // Level 400
+let globalEpisodes = [];
 let fetchEpisodes;
 let fetchShows;
 fetch("https://api.tvmaze.com/shows/82/episodes")
@@ -120,13 +121,19 @@ function createCard(episode) {
 }
 // CREATE CARDS
 
-searchBar.oninput = searchMatches();
+// Level 300
+let episodesList = getAllEpisodes();
+// Level 300
+
+searchBar.onchange = searchMatches();
 
 // SEARCH FUNCTION
-function searchMatches() {
+function searchMatches(episodes) {
   let target = searchBar.value;
+  // let episodeVal = episodes;
+  // console.log(globalEpisodes);
 
-  const filteredEpisodes = getAllEpisodes().filter((episode) => {
+  const filteredEpisodes = globalEpisodes.filter((episode) => {
     if (
       episode["name"].toLowerCase().includes(target.toLowerCase()) ||
       episode["summary"].toLowerCase().includes(target.toLowerCase())
@@ -145,9 +152,7 @@ function searchMatches() {
 }
 // Level 200 Complete
 
-// Level 300
-const episodesList = getAllEpisodes();
-// Level 300
+
 
 // Level 400
 const showsList = getAllShows();
@@ -187,10 +192,10 @@ showsSelectTag.addEventListener("change", () => {
 });
 
 function anotherFunction(data) {
-  console.log("Fetched");
+  console.log(data);
   populateSelect(data);
-
   makePageForEpisodes(data);
+  globalEpisodes = data;
 }
 
 // SELECT TAG FOR EPISODES
@@ -201,8 +206,7 @@ function populateSelect(episodes) {
   allEpisodes.map((episode, index) => {
     let option = document.createElement("option");
     option.value = index;
-    option.innerHTML = `S${episode.season.toString().padStart(2, 0)}
-    E${(index + 1).toString().padStart(2, 0)} ${episode.name} `;
+    option.innerHTML = `S${episode.season.toString().padStart(2, 0)}E${(index + 1).toString().padStart(2, 0)} ${episode.name} `;
     episodesSelectTag.appendChild(option);
   });
 }
